@@ -1,0 +1,288 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Education - E-Hospitality</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f0f4f8;
+            margin: 0;
+            padding: 0;
+            color: #2c3e50;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-weight: 500;
+            color: #2c3e50;
+        }
+
+        .header p {
+            color: #7f8c8d;
+            max-width: 800px;
+            margin: 15px auto 0;
+        }
+
+        .education-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .education-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+
+        .education-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-image {
+            height: 180px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .card-content {
+            padding: 25px;
+        }
+
+        .card-content h3 {
+            margin: 0 0 15px 0;
+            color: #2c3e50;
+        }
+
+        .card-content p {
+            color: #7f8c8d;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .resource-link {
+            display: inline-block;
+            background: #3498db;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .resource-link:hover {
+            background: #2980b9;
+        }
+
+        .resource-link i {
+            margin-left: 8px;
+        }
+
+        .section-title {
+            margin: 50px 0 20px;
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+            display: inline-block;
+        }
+
+        .resource-list {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 40px;
+        }
+
+        .resource-item {
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .resource-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .resource-item a {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+        }
+
+        .resource-item a:hover {
+            text-decoration: underline;
+        }
+
+        .resource-item a i {
+            margin-right: 10px;
+            color: #7f8c8d;
+        }
+
+        .resource-item p {
+            color: #7f8c8d;
+            margin: 5px 0 0 25px;
+            font-size: 0.9em;
+        }
+
+        .tip-card {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 25px;
+        }
+
+        .tip-card h4 {
+            margin: 0 0 15px 0;
+            color: #2c3e50;
+            display: flex;
+            align-items: center;
+        }
+
+        .tip-card h4 i {
+            margin-right: 10px;
+            color: #2ecc71;
+        }
+
+        .tip-card ul {
+            padding-left: 20px;
+            color: #7f8c8d;
+        }
+
+        .tip-card li {
+            margin-bottom: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .education-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Health Education Resources</h1>
+            <p>Access reliable health information, wellness tips, and disease prevention resources from trusted sources worldwide.</p>
+        </div>
+
+        <h2 class="section-title">Featured Health Topics</h2>
+        <div class="education-grid">
+            <!-- Card 1 -->
+            <div class="education-card">
+                <div class="card-image" style="background-image: url('{% static 'patient/images/Preventivecare.avif' %}');"></div>
+                <div class="card-content">
+                    <h3>Preventive Care</h3>
+                    <p>Learn about essential health screenings, vaccinations, and lifestyle changes to prevent diseases before they start.</p>
+                    <a href="https://www.healthline.com/health/what-is-preventive-health-and-why-is-it-important" class="resource-link">Explore Resources <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="education-card">
+                <div class="card-image" style="background-image: url('{% static 'patient/images/nutrition_diet.jpg' %}');"></div>
+                <div class="card-content">
+                    <h3>Nutrition & Diet</h3>
+                    <p>Discover evidence-based dietary guidelines and healthy eating plans for optimal wellness at every life stage.</p>
+                    <a href="https://www.health.harvard.edu/topics/nutrition" class="resource-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="education-card">
+                <div class="card-image" style="background-image: url('{% static 'patient/images/Mentalwellness.avif' %}');"></div>
+                <div class="card-content">
+                    <h3>Mental Wellness</h3>
+                    <p>Resources for stress management, mindfulness, and maintaining good mental health in challenging times.</p>
+                    <a href="https://globalwellnessinstitute.org/what-is-wellness/mental-wellness/" class="resource-link">View Resources <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="section-title">Trusted Health Resources</h2>
+        <div class="resource-list">
+            <div class="resource-item">
+                <a href="https://www.who.int/" target="_blank"><i class="fas fa-globe"></i> World Health Organization (WHO)</a>
+                <p>Global health authority providing disease outbreak news, health statistics, and international guidelines.</p>
+            </div>
+            
+            <div class="resource-item">
+                <a href="https://www.cdc.gov/" target="_blank"><i class="fas fa-shield-virus"></i> Centers for Disease Control (CDC)</a>
+                <p>US national public health institute with travel health notices, vaccination schedules, and health alerts.</p>
+            </div>
+            
+            <div class="resource-item">
+                <a href="https://www.mayoclinic.org/" target="_blank"><i class="fas fa-hospital"></i> Mayo Clinic Health Information</a>
+                <p>Trusted medical research, symptom checkers, and patient education materials.</p>
+            </div>
+            
+            <div class="resource-item">
+                <a href="https://www.nhs.uk/" target="_blank"><i class="fas fa-plus-square"></i> NHS Health A-Z</a>
+                <p>UK National Health Service's comprehensive health encyclopedia and self-care advice.</p>
+            </div>
+            
+            <div class="resource-item">
+                <a href="https://medlineplus.gov/" target="_blank"><i class="fas fa-book-medical"></i> MedlinePlus</a>
+                <p>NIH's consumer health site with easy-to-read materials on diseases, drugs, and wellness.</p>
+            </div>
+        </div>
+
+        <h2 class="section-title">Weekly Health Tips</h2>
+        <div class="tip-card">
+            <h4><i class="fas fa-heartbeat"></i> Heart Health</h4>
+            <ul>
+                <li>Aim for at least 150 minutes of moderate exercise per week</li>
+                <li>Limit saturated fats and opt for healthy oils like olive oil</li>
+                <li>Monitor your blood pressure regularly after age 40</li>
+                <li>Practice stress-reduction techniques like deep breathing</li>
+            </ul>
+        </div>
+
+        <div class="tip-card">
+            <h4><i class="fas fa-utensils"></i> Nutrition Tips</h4>
+            <ul>
+                <li>Fill half your plate with colorful fruits and vegetables</li>
+                <li>Choose whole grains over refined carbohydrates</li>
+                <li>Stay hydrated with water instead of sugary drinks</li>
+                <li>Practice mindful eating by slowing down during meals</li>
+            </ul>
+        </div>
+
+        <div class="tip-card">
+            <h4><i class="fas fa-brain"></i> Mental Wellness</h4>
+            <ul>
+                <li>Prioritize 7-9 hours of quality sleep each night</li>
+                <li>Take regular breaks from screens throughout the day</li>
+                <li>Maintain social connections with friends and family</li>
+                <li>Practice gratitude by noting 3 positive things daily</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,190 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Appointments - E-Hospitality</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f0f4f8;
+            margin: 0;
+            padding: 0;
+            color: #2c3e50;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #dfe6e9;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-weight: 500;
+        }
+
+        .book-btn {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .book-btn:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(41, 128, 185, 0.3);
+        }
+
+        .appointment-list {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .appointment-card {
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .appointment-card:last-child {
+            border-bottom: none;
+        }
+
+        .appointment-info h3 {
+            margin: 0 0 5px 0;
+            font-weight: 500;
+        }
+
+        .appointment-info p {
+            margin: 5px 0;
+            color: #7f8c8d;
+        }
+
+        .appointment-actions button {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .appointment-actions button:hover {
+            background: #c0392b;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+            margin-left: 10px;
+        }
+
+        .status-upcoming {
+            background: #f39c12;
+            color: white;
+        }
+
+        .status-completed {
+            background: #2ecc71;
+            color: white;
+        }
+
+        .no-appointments {
+            text-align: center;
+            padding: 40px;
+            color: #7f8c8d;
+        }
+
+        @media (max-width: 768px) {
+            .appointment-card {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .appointment-actions {
+                margin-top: 15px;
+                align-self: flex-end;
+            }
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="container">
+        <div class="header">
+            <h1>My Appointments</h1>
+            <a href="{% url 'patient-appointmentdata' %}" class="book-btn">
+                <i class="fas fa-plus"></i> Book an Appointment
+            </a>
+        </div>
+
+         {% if messages %}
+            {% for message in messages %}
+                <div style="color:green; font-weight:bold">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+
+        <div class="appointment-list">
+            {% if appointments %}
+                {% for appt in appointments %}
+                    <div class="appointment-card">
+                        <div class="appointment-info">
+                            <h3>{{ appt.doctor }} - {{ appt.department }}<span class="status {% if appt.appointment_date >= today %} status-upcoming {% else %} status-completed {% endif %}">
+                                {% if appt.appointment_date >= today %}Upcoming{% else %}Completed{% endif %}
+                            </span></h3>
+                            <p><strong>Date:</strong>{{ appt.appointment_date }} at {{ appt.appointment_time }}</p>
+                            <p><strong>Reason:</strong>{{ appt.reason }}</p>
+                        </div>
+                        <div class="appointment-actions">
+                            {% if appt.appointment_date >= today %}
+                                 <a href="{% url 'appointment-cancel' appt.id %}" onclick="return confirm('Are you sure you want to cancel this appointment?');" style="background: #e74c3c; color: white; padding: 8px 16px; border-radius: 4px; text-decoration: none;">Cancel</a>
+                            {% else %}
+                                <button disabled>Completed</button>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div class="no-appointments">
+                    <p>You don't have any appointments scheduled yet.</p>
+                    <a href="{% url 'patient-appointmentdata' %}" class="book-btn" style="margin-top: 15px;">
+                        <i class="fas fa-plus"></i> Book Your First Appointment
+                    </a>
+                </div>
+            {% endif %}
+
+           
+        </div>
+    </div>
+
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</body>
+</html>

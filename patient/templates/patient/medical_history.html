@@ -1,0 +1,184 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical History - E-Hospitality</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f0f4f8;
+            margin: 0;
+            padding: 0;
+            color: #2c3e50;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #dfe6e9;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-weight: 500;
+        }
+
+        .add-btn {
+            background: #2ecc71;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .add-btn:hover {
+            background: #27ae60;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(46, 204, 113, 0.3);
+        }
+
+        .add-btn i {
+            margin-right: 8px;
+        }
+
+        .history-list {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .history-card {
+            padding: 25px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .history-card:last-child {
+            border-bottom: none;
+        }
+
+        .history-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+
+        .visit-date {
+            font-weight: 500;
+            color: #3498db;
+        }
+
+        .doctor-info {
+            font-style: italic;
+            color: #7f8c8d;
+        }
+
+        .history-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .detail-group {
+            margin-bottom: 15px;
+        }
+
+        .detail-label {
+            font-weight: 500;
+            color: #2c3e50;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .detail-value {
+            color: #34495e;
+            line-height: 1.5;
+        }
+
+        .no-history {
+            text-align: center;
+            padding: 40px;
+            color: #7f8c8d;
+        }
+
+        @media (max-width: 768px) {
+            .history-header {
+                flex-direction: column;
+            }
+            
+            .doctor-info {
+                margin-top: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Medical History</h1>
+            <a href="{% url 'patient-medicaldata' %}" class="add-btn">
+                <i class="fas fa-plus"></i> Add Record
+            </a>
+        </div>
+
+        <div class="history-list">
+            {% if medicals %}
+                {% for med in medicals %}
+                    <div class="history-card">
+                        <div class="history-header">
+                            <span class="visit-date">{{ med.medical_date }}</span>
+                            <span class="doctor-info">{{ med.doctor }}</span>
+                        </div>
+                
+                        <div class="history-details">
+                            <div class="detail-group">
+                                <span class="detail-label">Diagnosis</span>
+                                <span class="detail-value">{{ med.diagnosis }}</span>
+                            </div>
+                    
+                            <div class="detail-group">
+                                <span class="detail-label">Medications</span>
+                                <span class="detail-value">{{ med.medications|linebreaksbr }}</span>
+                            </div>
+                    
+                            <div class="detail-group">
+                                <span class="detail-label">Allergies</span>
+                                <span class="detail-value">{{ med.allergies }}</span>
+                            </div>
+                    
+                            <div class="detail-group">
+                                <span class="detail-label">Treatment</span>
+                                <span class="detail-value">{{ med.treatment|linebreaksbr }}</span>
+                            </div>
+                        </div>
+                    </div>    
+                {% endfor %}
+            {% else %}
+                <div class="no-history">
+                    <p>No medical history records found.</p>
+                </div>   
+            {% endif %}     
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,340 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Hospitality - Patient Management</title>
+    <style>
+        :root {
+            --primary: #2a7fba;
+            --secondary: #6c757d;
+            --light: #f8f9fa;
+            --dark: #343a40;
+            --white: #ffffff;
+            --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: var(--dark);
+        }
+        
+        /* Top Navigation */
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo-img {
+            height: 40px;
+            width: auto;
+        }
+        
+        .logo-text {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary);
+        }
+        
+        .doctor-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .doctor-name {
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        .doctor-img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--primary);
+        }
+        
+        /* Page Header */
+        .page-header {
+            padding: 30px 5%;
+            background-color: var(--white);
+            margin-bottom: 30px;
+        }
+        
+        .page-title {
+            font-size: 28px;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        .page-subtitle {
+            color: var(--secondary);
+            font-weight: normal;
+        }
+        
+        /* Search and Filter */
+        .search-filter {
+            padding: 0 5% 30px;
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .search-box {
+            flex: 1;
+            min-width: 300px;
+            position: relative;
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 12px 20px 12px 45px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: var(--transition);
+        }
+        
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(42, 127, 186, 0.1);
+        }
+        
+        .search-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--secondary);
+        }
+        
+        .filter-select {
+            padding: 12px 20px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            background-color: var(--white);
+            min-width: 200px;
+        }
+        
+        /* Patient Cards Grid */
+        .patients-grid {
+            padding: 0 5% 50px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        
+        .patient-card {
+            background: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: var(--transition);
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        
+        .patient-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+        }
+        
+        .patient-avatar {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+        
+        .patient-info {
+            padding: 20px;
+        }
+        
+        .patient-name {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+        
+        .patient-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+        
+        .patient-details {
+            background-color: #f0f7ff;
+            padding: 12px;
+            border-radius: 6px;
+            margin-top: 15px;
+        }
+        
+        .details-label {
+            font-size: 12px;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 5px;
+            display: block;
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 500;
+            margin-top: 10px;
+        }
+        
+        .status-new {
+            background-color: #e3f7e8;
+            color: #28a745;
+        }
+        
+        .status-followup {
+            background-color: #fff8e6;
+            color: #ffc107;
+        }
+
+        .no-history {
+            text-align: center;
+            padding: 40px;
+            color: #7f8c8d;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: var(--light);
+            padding: 30px 5%;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-direction: column;
+        }
+
+        .footer-logo-img {
+            height: 30px;
+            width: auto;
+            margin-bottom: 10px;
+        }
+
+        .footer-text {
+            font-size: 14px;
+            opacity: 0.8;
+            margin-bottom: 15px;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .search-filter {
+                flex-direction: column;
+            }
+            
+            .search-box, .filter-select {
+                min-width: 100%;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Top Navigation Bar -->
+    <div class="top-bar">
+        <div class="logo-container">
+            <img src="{% static 'doctor/images/th.jpg' %}" alt="Hospital Logo" class="logo-img">
+            <div class="logo-text">E-Hospitality</div>
+        </div>
+        <div class="doctor-info">
+            <span class="doctor-name">{{ doctor.first_name }} {{ doctor.last_name }} </span>
+            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Doctor" class="doctor-img">
+        </div>
+    </div>
+    
+    <!-- Page Header -->
+    <div class="page-header">
+        <h1 class="page-title">Patient Management</h1>
+        <p class="page-subtitle">View and manage your patient records</p>
+    </div>
+    
+    <!-- Search and Filter -->
+    <div class="search-filter">
+        <form method="get" class="search-box">
+            <i class="fas fa-search search-icon"></i>
+            <input type="text" class="search-input" name="q" placeholder="Search patients by name...">
+        </form>
+    </div>
+    
+    <!-- Patient Cards Grid -->
+    <div class="patients-grid">
+
+        <!-- Patient Card 1 -->
+        {% for item in display_list %}
+            <a href="{% url 'patient_details' item.patient.id %}" class="patient-card">
+                <img src="{% static 'doctor/images/noprofile.jpg' %}" alt="Patient" class="patient-avatar">
+                <div class="patient-info">
+                    <h3 class="patient-name">{{ item.patient.first_name }} {{ item.patient.last_name }} </h3>
+                    <div class="patient-details">
+                        <span class="detail-label">Click to view the full details</span>
+                    </div>
+                    {% if item.status == "New Patient" %}
+                        <span class="status-badge status-new"> {{ item.status }} </span>
+                    {% else %}
+                        <span class="status-badge status-followup"> {{ item.status }} </span>
+                    {% endif %}
+                </div>
+            </a>
+        {% empty %}
+            <div class="no-history">
+                <p>No Patients found.</p>
+            </div>
+        {% endfor %}
+    </div>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <img src="{% static 'doctor/images/th.jpg' %}" alt="Hospital Logo" class="footer-logo-img">
+                <div class="footer-text">E-Hospitality © 2025. All rights reserved.</div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

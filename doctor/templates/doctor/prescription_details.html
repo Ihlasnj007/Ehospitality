@@ -1,0 +1,271 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Hospitality - New Prescription</title>
+    <style>
+        :root {
+            --primary: #2a7fba;
+            --secondary: #6c757d;
+            --light: #f8f9fa;
+            --dark: #343a40;
+            --white: #ffffff;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: var(--dark);
+        }
+        
+        /* Top Navigation */
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo-img {
+            height: 40px;
+            width: auto;
+        }
+        
+        .logo-text {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary);
+        }
+        
+        .doctor-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .doctor-img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--primary);
+        }
+        
+        /* Main Content */
+        .prescription-container {
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+        
+        .prescription-header {
+            background-color: var(--white);
+            padding: 25px;
+            border-radius: 10px 10px 0 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        
+        .patient-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .patient-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 20px;
+            border: 2px solid var(--primary);
+        }
+        
+        .patient-name {
+            font-size: 20px;
+            font-weight: 600;
+        }
+        
+        .patient-meta {
+            color: var(--secondary);
+            margin-top: 5px;
+            font-size: 14px;
+        }
+        
+        /* Prescription Form */
+        .prescription-form {
+            background-color: var(--white);
+            padding: 25px;
+            border-radius: 0 0 10px 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--dark);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(42, 127, 186, 0.1);
+        }
+        
+        textarea.form-control {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        /* Submit Button */
+        .submit-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 100%;
+        }
+        
+        .submit-btn:hover {
+            background-color: #1e6fa0;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: var(--light);
+            padding: 30px 5%;
+            text-align: center;
+            margin-top: auto;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .footer-logo-img {
+            height: 30px;
+            width: auto;
+        }
+        
+        .footer-text {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Top Navigation Bar -->
+    <div class="top-bar">
+        <div class="logo-container">
+            <img src="{% static 'doctor/images/th.jpg' %}" alt="Hospital Logo" class="logo-img">
+            <div class="logo-text">E-Hospitality</div>
+        </div>
+        <div class="doctor-info">
+            <span class="doctor-name">{{ doctor.first_name }} {{ doctor.last_name }} </span>
+            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Doctor" class="doctor-img">
+        </div>
+    </div>
+
+    <!-- Prescription Container -->
+    <div class="prescription-container">
+        <!-- Prescription Header -->
+        <div class="prescription-header">
+            <div class="patient-info">
+                <img src="{% static 'doctor/images/noprofile.jpg' %}" alt="Patient" class="patient-avatar">
+                <div>
+                    <div class="patient-name">{{ appointments.patient.first_name }} {{ appointments.patient.last_name }}</div>
+                    <div class="patient-meta">{{ appointments.patient.dob }} • {{ appointments.patient.gender }} </div>
+                </div>
+            </div>
+            <div class="appointment-info">
+                <div><strong>Appointment Date:</strong> {{appointments.appointment_date}} </div>
+                <div><strong>Reason for Visit:</strong> {{ appointments.reason }} </div>
+            </div>
+        </div>
+        
+        <!-- Prescription Form -->
+        <form class="prescription-form" action="{% url 'prescription_form' appointments.id %}" method="post">
+            {% csrf_token %}
+
+            {% if messages %}
+                {% for message in messages %}
+                    <div style="color:red; font-weight:bold">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+
+            <!-- Diagnosis Section -->
+            <div class="form-group">
+                <label for="diagnosis" class="form-label">Diagnosis</label>
+                <textarea id="diagnosis" name="diagnosis" class="form-control" placeholder="Enter diagnosis details..."></textarea>
+            </div>
+            
+            <!-- Prescription Section -->
+            <div class="form-group">
+                <label for="prescription" class="form-label">Prescription</label>
+                <textarea id="prescription" name="prescription" class="form-control" placeholder="Enter prescribed medicines and instructions..."></textarea>
+            </div>
+            
+            <!-- Submit Button -->
+            <button type="submit" class="submit-btn">
+                <i class="fas fa-save"></i> Save Prescription
+            </button>
+        </form>
+    </div>
+    
+<!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <img src="{% static 'doctor/images/th.jpg' %}" alt="Hospital Logo" class="footer-logo-img">
+                <div class="footer-text">E-Hospitality © 2025. All rights reserved.</div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

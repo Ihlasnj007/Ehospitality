@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Help Center | E-Hospitality</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: #f4f6f9;
+        }
+
+        .help-container {
+            max-width: 900px;
+            margin: 60px auto;
+            padding: 40px;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 0 12px rgba(0, 0, 0, 0.08);
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            color: #007bff;
+            margin-top: 30px;
+        }
+
+        .faq {
+            margin-bottom: 20px;
+        }
+
+        .faq p {
+            margin: 6px 0 0;
+            color: #555;
+        }
+
+        @media (max-width: 768px) {
+            .help-container {
+                padding: 30px 20px;
+                margin: 40px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="help-container">
+        <h1>Help Center</h1>
+
+        <h2>For Patients</h2>
+        <div class="faq">
+            <strong>How do I book an appointment?</strong>
+            <p>Register or log in as a patient, then go to the Appointments section to choose a doctor and time slot.</p>
+        </div>
+        <div class="faq">
+            <strong>Where can I see my prescriptions?</strong>
+            <p>After a doctor updates your appointment, you can view prescriptions under the "Prescriptions" tab in your dashboard.</p>
+        </div>
+        <div class="faq">
+            <strong>I forgot my password. What should I do?</strong>
+            <p>Please contact support at <a href="mailto:support@ehospitality.com">support@ehospitality.com</a> for assistance.</p>
+        </div>
+
+        <h2>For Doctors</h2>
+        <div class="faq">
+            <strong>How do I view my appointments?</strong>
+            <p>Log in as a doctor and go to the "My Appointments" section to see your schedule.</p>
+        </div>
+        <div class="faq">
+            <strong>How do I prescribe medicines?</strong>
+            <p>Click on a patient's appointment in your dashboard and fill in the prescription details.</p>
+        </div>
+        <div class="faq">
+            <strong>How do I manage patient records?</strong>
+            <p>You can only view and prescribe for patients who have booked appointments with you.</p>
+        </div>
+
+        <h2>Need More Help?</h2>
+        <p>If you still have questions, feel free to <a href="{% url 'contact' %}">contact us</a> anytime.</p>
+    </div>
+
+</body>
+</html>
